@@ -1,4 +1,6 @@
+using System.Security.Claims;
 using System.Threading.Tasks;
+using HouseRentalSystem.Controllers.Contracts;
 using HouseRentalSystem.Models;
 using HouseRentalSystem.Options;
 using HouseRentalSystem.Services;
@@ -23,9 +25,9 @@ public class AuthenticationController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
-        var user = await _userService.LoginUserAsync(request.Email, request.Password);
+        var jwt = await _userService.LoginUserAsync(request.Email, request.Password);
         return Ok(
-            new { Token = user, ExpiresIn = DateTime.UtcNow.AddMinutes(_jwtOptions.ExpiryMinutes) }
+            new { Token = jwt, ExpiresIn = DateTime.UtcNow.AddMinutes(_jwtOptions.ExpiryMinutes) }
         );
     }
 
