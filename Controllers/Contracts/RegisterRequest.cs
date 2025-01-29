@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
+namespace HouseRentalSystem.Controllers.Contracts;
+
 public class RegisterRequest
 {
     [Required]
