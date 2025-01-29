@@ -1,0 +1,5 @@
+# delete a listing by id
+@api = http://localhost:5019
+@listingId = 
+
+DELETE  {{api}}/listings/{{listingId}}

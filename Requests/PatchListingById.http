@@ -1,0 +1,5 @@
+# partial(full) update a listing with the given id
+@api = http://localhost:5019
+@listingId = 
+
+PATCH {{api}}/listings/{{listingId}}

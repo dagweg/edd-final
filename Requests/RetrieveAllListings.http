@@ -1,0 +1,4 @@
+# retrieve all listings (must include pagination)
+@api = http://localhost:5019
+
+GET {{api}}/listings/

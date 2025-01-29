@@ -1,0 +1,10 @@
+@api = http://localhost:5019
+
+POST {{api}}/auth/register
+Content-Type:  application/json
+
+{
+  "Email": "johndoe@gmail.com",
+  "Password": "password",
+  "FullName": "John Doe"
+}

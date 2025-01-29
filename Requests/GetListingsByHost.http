@@ -1,0 +1,4 @@
+# get all listings of a particular host (must include pagination)
+@api = http://localhost:5019
+@hostId = 
+GET {{api}}/listings/host/{{hostId}}
