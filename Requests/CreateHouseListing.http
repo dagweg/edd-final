@@ -2,3 +2,15 @@
 @api = http://localhost:5019
 
 POST {{api}}/listings/
+Content-Type:  application/json
+
+{
+  "Title": "Beautiful House in the Suburbs",
+  "Description": "This house is perfect for a family of 4. It has a large backyard and a pool.",
+  "Location": "123 Main St", 
+  "PricePerNight": 100,
+  "NumberOfGuests": 4,
+  "ThumbnailUrl": "https://example.com/house.jpg",
+  "Amenities": ["Pool", "Backyard"],
+  "HostId": "1"
+}
