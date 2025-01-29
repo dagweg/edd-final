@@ -31,6 +31,11 @@ public class UserService : IUserService
         throw new NotImplementedException();
     }
 
+    public Task<string> LoginUserAsync(string email, string password)
+    {
+        return Task.FromResult("this-is-a-fake-token");
+    }
+
     public Task<User> UpdateUserAsync(string id, User updatedUser)
     {
         throw new NotImplementedException();
