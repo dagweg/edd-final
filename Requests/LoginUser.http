@@ -1,3 +1,9 @@
 @api = http://localhost:5019
 
 POST {{api}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "johndoe@gmail.com",
+    "password": "password"
+}
