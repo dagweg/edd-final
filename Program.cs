@@ -11,6 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.Configure<MongoDbOptions>(
         builder.Configuration.GetSection(MongoDbOptions.SectionName)
     );
+    builder.Services.Configure<JwtOptions>(
+        builder.Configuration.GetSection(JwtOptions.SectionName)
+    );
 
     builder.Services.AddTransient(typeof(IPasswordHasher<>), typeof(PasswordHasher<>));
     builder.Services.AddScoped<IUserContext, UserContext>();
