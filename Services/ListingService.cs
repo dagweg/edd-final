@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using HouseRentalSystem.Controllers.Contracts;
 using HouseRentalSystem.Models;
 using HouseRentalSystem.Services.MongoDB;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace HouseRentalSystem.Services
@@ -36,53 +38,20 @@ namespace HouseRentalSystem.Services
                 NumberOfGuests = newListing.NumberOfGuests,
                 ThumbnailUrl = newListing.ThumbnailUrl,
                 Amenities = newListing.Amenities ?? new List<string>(), // Ensure Amenities isn't null
-                HostId = userId,
+                HostId = ObjectId.Parse(userId),
             };
             await _listingContext.CreateAsync(listing);
         }
 
-
-    public async Task<bool> DeleteListingAsync(string id)
-    {
-        var listing = await _listingContext.GetAsync(id);
-        if (listing is null)
-            return false;
-
-        await _listingContext.DeleteAsync(id);
-        return true;
-    }
-
-    public async Task<Listing> GetListingByIdAsync(string id)
-    {
-        var listing = await _listingContext.GetAsync(id);
-        if (listing is null)
-            throw new KeyNotFoundException($"Listing with ID {id} not found");
-
-        return listing;
-    }
-
-            
-
         // Delete a listing by ID
         public async Task<bool> DeleteListingAsync(string id)
         {
-            return await _listingContext.DeleteAsync(id);
+            bool status = await _listingContext.DeleteAsync(id);
+            if (status is false)
+                throw new KeyNotFoundException("Listing not found!");
+            return status;
         }
 
-
-        public async Task<List<Listing>> GetListingByNameAsync(string name)
-        {
-            // Retrieve all listings
-            var allListings = await _listingContext.GetAllAsync();
-
-            // Filter in memory
-            var filteredListings = allListings
-                .Where(l => l.Title.ToLower().Contains(name.ToLower()))
-                .ToList();
-
-            return filteredListings;
-        }
-        
         // Get a listing by its ID
         public async Task<Listing> GetListingByIdAsync(string id)
         {
@@ -90,26 +59,79 @@ namespace HouseRentalSystem.Services
             if (listing == null)
                 throw new KeyNotFoundException("Listing not found!");
 
+            return listing;
+        }
+
+        public async Task<List<Listing>> GetListingByHostIdAsync(string hostId)
+        {
+            var hostOid = ObjectId.Parse(hostId);
+            var listing = await _listingContext.GetAllAsync(
+                Builders<Listing>.Filter.Eq(l => l.HostId, hostOid)
+            );
+            if (listing == null)
+                throw new KeyNotFoundException("Listing not found!");
 
             return listing;
         }
 
-        // Get listings by name (title)
-        public async Task<List<Listing>> GetListingByNameAsync(string name)
+        public async Task<List<Listing>> FilterListingAsync(
+            string filterBy,
+            string value,
+            PaginationParameters paginationParameters
+        )
         {
-            return await _listingContext.GetByNameAsync(name);
+            List<Listing> listings = [];
+
+            if (filterBy.Equals(nameof(Listing.Title), StringComparison.OrdinalIgnoreCase))
+            {
+                listings = await _listingContext.FilterAsync(l => l.Title, value);
+            }
+            else if (filterBy.Equals(nameof(Listing.Location), StringComparison.OrdinalIgnoreCase))
+            {
+                listings = await _listingContext.FilterAsync(l => l.Location, value);
+            }
+            else if (
+                filterBy.Equals(nameof(Listing.PricePerNight), StringComparison.OrdinalIgnoreCase)
+            )
+                listings = await _listingContext.FilterAsync(
+                    l => l.PricePerNight,
+                    decimal.Parse(value)
+                );
+            else if (
+                filterBy.Equals(nameof(Listing.NumberOfGuests), StringComparison.OrdinalIgnoreCase)
+            )
+                listings = await _listingContext.FilterAsync(
+                    l => l.NumberOfGuests,
+                    int.Parse(value)
+                );
+            else
+            {
+                throw new ArgumentException(
+                    $"Invalid filter parameter! Please filter by title, location, pricePerNight, numberOfGuests"
+                );
+            }
+
+            var paginated = listings
+                .Skip((paginationParameters.PageNumber - 1) * paginationParameters.PageSize)
+                .Take(paginationParameters.PageSize);
+
+            return paginated.ToList();
         }
 
         // Get all listings
-        public async Task<List<Listing>> GetListingsAsync()
+        public async Task<List<Listing>> GetListingsAsync(PaginationParameters paginationParameters)
         {
-            return await _listingContext.GetAllAsync();
+            var listings = await _listingContext.GetAllAsync(null);
+            return listings
+                .Skip((paginationParameters.PageNumber - 1) * paginationParameters.PageSize)
+                .Take(paginationParameters.PageSize)
+                .ToList();
         }
 
         // Update an existing listing
-        public async Task<Listing> UpdateListingAsync(
+        public async Task<Listing> PatchListingAsync(
             string listingId,
-            UpdateListingRequest updatedListing
+            PatchListingRequest patchedListing
         )
         {
             var existingListing = await _listingContext.GetAsync(listingId);
@@ -117,20 +139,20 @@ namespace HouseRentalSystem.Services
                 throw new KeyNotFoundException("Listing not found!");
 
             // Update the properties that are provided (null checks handled)
-            existingListing.Title = updatedListing.Title ?? existingListing.Title;
-            existingListing.Description = updatedListing.Description ?? existingListing.Description;
-            existingListing.Location = updatedListing.Location ?? existingListing.Location;
+            existingListing.Title = patchedListing.Title ?? existingListing.Title;
+            existingListing.Description = patchedListing.Description ?? existingListing.Description;
+            existingListing.Location = patchedListing.Location ?? existingListing.Location;
             existingListing.PricePerNight =
-                updatedListing.PricePerNight != 0
-                    ? updatedListing.PricePerNight
+                patchedListing.PricePerNight != 0
+                    ? patchedListing.PricePerNight
                     : existingListing.PricePerNight;
             existingListing.NumberOfGuests =
-                updatedListing.NumberOfGuests != 0
-                    ? updatedListing.NumberOfGuests
+                patchedListing.NumberOfGuests != 0
+                    ? patchedListing.NumberOfGuests
                     : existingListing.NumberOfGuests;
             existingListing.ThumbnailUrl =
-                updatedListing.ThumbnailUrl ?? existingListing.ThumbnailUrl;
-            existingListing.Amenities = updatedListing.Amenities ?? existingListing.Amenities;
+                patchedListing.ThumbnailUrl ?? existingListing.ThumbnailUrl;
+            existingListing.Amenities = patchedListing.Amenities ?? existingListing.Amenities;
 
             // Update the listing in the database
             await _listingContext.UpdateAsync(listingId, existingListing);

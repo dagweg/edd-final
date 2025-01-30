@@ -1,4 +1,5 @@
 # retrieve all listings (must include pagination)
 @api = http://localhost:5019
 
-GET {{api}}/listings/
+GET {{api}}/listings?pageNumber=1&pageSize=10
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzliMjViNTNmMzZhNDdhZTdlMDg2MmEiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwibmJmIjoxNzM4MjI4MzIxLCJleHAiOjE3MzgyMzE5MjEsImlhdCI6MTczODIyODMyMSwiaXNzIjoiSG91c2VSZW50YWxTeXN0ZW0iLCJhdWQiOiJIb3VzZVJlbnRhbEF1ZGllbmNlIn0.13nZ8aEz392ibOFDddH9meuPVtUhI1pLYWs6nBBCj0o

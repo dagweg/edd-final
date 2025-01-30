@@ -33,8 +33,16 @@ public class JwtTokenHelper
         return tokenHandler.WriteToken(token);
     }
 
-    public static string? GetUserId(ClaimsPrincipal user)
+    /// <summary>
+    /// Get the user ID from the JWT token.
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    /// <exception cref="UnauthorizedAccessException"></exception>
+    public static string GetUserId(ClaimsPrincipal user)
     {
-        return user.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub)?.Value;
+        var userIdClaim = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+        return userIdClaim is null ? throw new UnauthorizedAccessException() : userIdClaim.Value;
     }
 }

@@ -3,7 +3,7 @@
 
 POST {{api}}/listings/
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzlhNGE2MzQ3NzIzZDEzYTg4NTg3YjMiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwibmJmIjoxNzM4MTcyMDMzLCJleHAiOjE3MzgxNzU2MzMsImlhdCI6MTczODE3MjAzMywiaXNzIjoiSG91c2VSZW50YWxTeXN0ZW0iLCJhdWQiOiJIb3VzZVJlbnRhbEF1ZGllbmNlIn0.c9J7eaS2OQl1foYNA4rw99JNGv5wClh5ZiwOxTFXHno
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzliMjViNTNmMzZhNDdhZTdlMDg2MmEiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwibmJmIjoxNzM4MjM1MzEwLCJleHAiOjE3MzgyMzg5MTAsImlhdCI6MTczODIzNTMxMCwiaXNzIjoiSG91c2VSZW50YWxTeXN0ZW0iLCJhdWQiOiJIb3VzZVJlbnRhbEF1ZGllbmNlIn0.AJAnIjMg9nFyx0UvNAYSq4FpF1_ilayiY6TuzZpePG0
 
 {
   "Title": "Beautiful House in the Suburbs",
@@ -12,6 +12,158 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzlhNGE2M
   "PricePerNight": 100,
   "NumberOfGuests": 4,
   "ThumbnailUrl": "https://example.com/house.jpg",
-  "Amenities": ["Pool", "Backyard"],
-  "HostId": "1"
+  "Amenities": ["Pool", "Backyard"]
 }
+
+# {
+#   "Title": "Luxury Beachfront House",
+#   "Description": "A stunning property overlooking the ocean. Perfect for a weekend getaway.",
+#   "Location": "456 Oceanview Drive",
+#   "PricePerNight": 500,
+#   "NumberOfGuests": 8,
+#   "ThumbnailUrl": "https://example.com/beachhouse.jpg",
+#   "Amenities": ["Ocean View", "Private Beach"],
+
+# }
+
+# {
+#   "Title": "Cozy Mountain Cabin",
+#   "Description": "Enjoy a peaceful retreat in this rustic mountain cabin.",
+#   "Location": "789 Alpine Road",
+#   "PricePerNight": 150,
+#   "NumberOfGuests": 6,
+#   "ThumbnailUrl": "https://example.com/cabin.jpg",
+#   "Amenities": ["Fireplace", "Mountain View"],
+
+# }
+
+# {
+#   "Title": "Modern Urban Apartment",
+#   "Description": "Located in the heart of downtown with easy access to restaurants and shops.",
+#   "Location": "12 City Plaza",
+#   "PricePerNight": 200,
+#   "NumberOfGuests": 2,
+#   "ThumbnailUrl": "https://example.com/apartment.jpg",
+#   "Amenities": ["WiFi", "Rooftop Access"],
+
+# }
+
+# {
+#   "Title": "Family-Friendly Bungalow",
+#   "Description": "A spacious bungalow with a playground and pet-friendly.",
+#   "Location": "34 Maple Street",
+#   "PricePerNight": 120,
+#   "NumberOfGuests": 5,
+#   "ThumbnailUrl": "https://example.com/bungalow.jpg",
+#   "Amenities": ["Playground", "Pet-Friendly"],
+
+# }
+
+# {
+#   "Title": "Romantic Countryside Cottage",
+#   "Description": "Perfect for couples seeking a quiet and romantic escape.",
+#   "Location": "56 Countryside Lane",
+#   "PricePerNight": 180,
+#   "NumberOfGuests": 2,
+#   "ThumbnailUrl": "https://example.com/cottage.jpg",
+#   "Amenities": ["Garden", "Hot Tub"],
+
+# }
+
+
+# {
+#   "Title": "Artistic Loft",
+#   "Description": "Unique and stylish loft ideal for creatives.",
+#   "Location": "98 Art District Blvd",
+#   "PricePerNight": 220,
+#   "NumberOfGuests": 3,
+#   "ThumbnailUrl": "https://example.com/loft.jpg",
+#   "Amenities": ["High Ceilings", "Art Studio"],
+
+# }
+
+
+# {
+#   "Title": "Vineyard Villa",
+#   "Description": "Stay among the vineyards with a private wine tasting experience.",
+#   "Location": "101 Vineyard Rd",
+#   "PricePerNight": 400,
+#   "NumberOfGuests": 6,
+#   "ThumbnailUrl": "https://example.com/vineyard.jpg",
+#   "Amenities": ["Wine Cellar", "Vineyard View"],
+
+# }
+
+# {
+#   "Title": "Private Island Villa",
+#   "Description": "Experience ultimate luxury on your own private island.",
+#   "Location": "Private Island Resort",
+#   "PricePerNight": 2000,
+#   "NumberOfGuests": 10,
+#   "ThumbnailUrl": "https://example.com/island.jpg",
+#   "Amenities": ["Private Beach", "Full Staff"],
+
+# }
+
+# {
+#   "Title": "Lakeside Cabin",
+#   "Description": "A serene cabin by the lake, perfect for fishing and relaxation.",
+#   "Location": "303 Lakeside Drive",
+#   "PricePerNight": 130,
+#   "NumberOfGuests": 4,
+#   "ThumbnailUrl": "https://example.com/lake.jpg",
+#   "Amenities": ["Fishing Dock", "Kayak Rental"],
+# }
+
+# {
+#   "Title": "Luxury Penthouse Suite",
+#   "Description": "A top-floor suite with breathtaking city views.",
+#   "Location": "404 Skyline Tower",
+#   "PricePerNight": 600,
+#   "NumberOfGuests": 6,
+#   "ThumbnailUrl": "https://example.com/penthouse.jpg",
+#   "Amenities": ["City View", "Private Elevator"]
+# }
+
+
+  # {
+  #   "Title": "Eco-Friendly Home",
+  #   "Description": "A sustainable home with solar panels and a vegetable garden.",
+  #   "Location": "505 Greenway Blvd",
+  #   "PricePerNight": 110,
+  #   "NumberOfGuests": 5,
+  #   "ThumbnailUrl": "https://example.com/eco.jpg",
+  #   "Amenities": ["Solar Energy", "Organic Garden"]
+  # }
+
+#   {
+#   "Title": "Desert Oasis",
+#   "Description": "A beautiful oasis in the middle of the desert, ideal for stargazing.",
+#   "Location": "606 Desert Palm Dr",
+#   "PricePerNight": 250,
+#   "NumberOfGuests": 6,
+#   "ThumbnailUrl": "https://example.com/desert.jpg",
+#   "Amenities": ["Infinity Pool", "Firepit"]
+# }
+
+# {
+#   "Title": "Historical Castle",
+#   "Description": "Step back in time with a stay in this historical castle.",
+#   "Location": "707 Royal Road",
+#   "PricePerNight": 800,
+#   "NumberOfGuests": 12,
+#   "ThumbnailUrl": "https://example.com/castle.jpg",
+#   "Amenities": ["Castle Grounds", "Library"]
+# }
+
+# {
+#   "Title": "Ski-In Ski-Out Chalet",
+#   "Description": "A cozy chalet located right on the slopes.",
+#   "Location": "808 Snowy Peak Rd",
+#   "PricePerNight": 300,
+#   "NumberOfGuests": 8,
+#   "ThumbnailUrl": "https://example.com/chalet.jpg",
+#   "Amenities": ["Ski Access", "Hot Tub"]
+# }
+
+

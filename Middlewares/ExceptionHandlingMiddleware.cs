@@ -19,6 +19,21 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
+        catch (UnauthorizedAccessException ex)
+        {
+            var problemDetails = new ProblemDetails
+            {
+                Title = "Unauthorized",
+                Detail = ex.Message,
+                Status = StatusCodes.Status401Unauthorized,
+                Extensions = { { "traceId", context.TraceIdentifier } },
+            };
+
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+
+            await context.Response.WriteAsJsonAsync(problemDetails);
+            LogError(context, ex);
+        }
         catch (AlreadyExistsException ex)
         {
             var problemDetails = new ProblemDetails
@@ -45,6 +60,21 @@ public class ExceptionHandlingMiddleware
             };
 
             context.Response.StatusCode = StatusCodes.Status404NotFound;
+
+            await context.Response.WriteAsJsonAsync(problemDetails);
+            LogError(context, ex);
+        }
+        catch (ArgumentException ex)
+        {
+            var problemDetails = new ProblemDetails
+            {
+                Title = "Invalid Argument",
+                Detail = ex.Message,
+                Status = StatusCodes.Status400BadRequest,
+                Extensions = { { "traceId", context.TraceIdentifier } },
+            };
+
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
 
             await context.Response.WriteAsJsonAsync(problemDetails);
             LogError(context, ex);

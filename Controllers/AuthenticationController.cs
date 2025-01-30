@@ -54,6 +54,8 @@ public class AuthenticationController : ControllerBase
                 Email = request.Email,
                 PasswordHash = request.Password,
                 Name = request.FullName,
+                Phone = request.Phone,
+                Address = request.Address,
             }
         );
 

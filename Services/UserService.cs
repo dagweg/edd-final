@@ -7,7 +7,6 @@ using HouseRentalSystem.Options;
 using HouseRentalSystem.Services.MongoDB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using HouseRentalSystem.Helpers;
 
 namespace HouseRentalSystem.Services;
 
@@ -51,6 +50,14 @@ public class UserService : IUserService
         if (user is null)
         {
             throw new KeyNotFoundException("User not found. Please register.");
+        }
+
+        if (
+            _passwordHasher.VerifyHashedPassword(user.Email, user.PasswordHash, password)
+            == PasswordVerificationResult.Failed
+        )
+        {
+            throw new UnauthorizedAccessException("Invalid password.");
         }
 
         var jwt = JwtTokenHelper.CreateToken(

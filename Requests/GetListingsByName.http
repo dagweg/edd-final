@@ -1,6 +1,6 @@
-# retrieve the listing with the given id
+# get all listings of a particular host (must include pagination)
 @api = http://localhost:5019
-@listingId = 679b46d45a36d0b45370ada1
 
-GET {{api}}/listings/{{listingId}}
+
+GET {{api}}/listings/search?value=2&filterBy=numberOfGuests
 Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzliMjViNTNmMzZhNDdhZTdlMDg2MmEiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwibmJmIjoxNzM4MjM1MzEwLCJleHAiOjE3MzgyMzg5MTAsImlhdCI6MTczODIzNTMxMCwiaXNzIjoiSG91c2VSZW50YWxTeXN0ZW0iLCJhdWQiOiJIb3VzZVJlbnRhbEF1ZGllbmNlIn0.AJAnIjMg9nFyx0UvNAYSq4FpF1_ilayiY6TuzZpePG0

@@ -12,11 +12,12 @@ public static class JwtTokenHelper
         string issuer,
         string audience,
         System.Collections.Generic.IEnumerable<Claim> claims,
-        int expiryMinutes)
+        int expiryMinutes
+    )
     {
         var key = Encoding.ASCII.GetBytes(secretKey);
         var tokenHandler = new JwtSecurityTokenHandler();
-        
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
@@ -25,7 +26,8 @@ public static class JwtTokenHelper
             Audience = audience,
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature)
+                SecurityAlgorithms.HmacSha256Signature
+            ),
         };
 
         var token = tokenHandler.CreateToken(tokenDescriptor);
@@ -34,7 +36,7 @@ public static class JwtTokenHelper
 
     public static string GetUserId(ClaimsPrincipal user)
     {
-        return user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
+        return user.FindFirst(ClaimTypes.NameIdentifier)?.Value
             ?? throw new UnauthorizedAccessException("User ID not found in token");
     }
 }

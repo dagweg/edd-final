@@ -1,5 +1,12 @@
 # partial(full) update a listing with the given id
 @api = http://localhost:5019
-@listingId = 
+@listingId = 679b334f186e754d5b3677cf
 
 PATCH {{api}}/listings/{{listingId}}
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzliMjViNTNmMzZhNDdhZTdlMDg2MmEiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwibmJmIjoxNzM4MjI4MzIxLCJleHAiOjE3MzgyMzE5MjEsImlhdCI6MTczODIyODMyMSwiaXNzIjoiSG91c2VSZW50YWxTeXN0ZW0iLCJhdWQiOiJIb3VzZVJlbnRhbEF1ZGllbmNlIn0.13nZ8aEz392ibOFDddH9meuPVtUhI1pLYWs6nBBCj0o
+Content-Type: application/json
+
+{
+  "pricePerNight": "500",
+  "numberOfGuests": "10"
+}

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using HouseRentalSystem.Models;
 
 namespace HouseRentalSystem.Services.MongoDB
@@ -7,7 +8,9 @@ namespace HouseRentalSystem.Services.MongoDB
     {
         // Custom methods specific to Listing entity
 
-        // Method to get listings by title
-        Task<List<Listing>> GetByNameAsync(string name);
+
+        Task<List<Listing>> FilterAsync(Expression<Func<Listing, object>> filterBy, string value);
+        Task<List<Listing>> FilterAsync(Expression<Func<Listing, object>> filterBy, int value);
+        Task<List<Listing>> FilterAsync(Expression<Func<Listing, object>> filterBy, decimal value);
     }
 }

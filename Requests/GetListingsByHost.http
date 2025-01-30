@@ -1,4 +1,6 @@
 # get all listings of a particular host (must include pagination)
 @api = http://localhost:5019
-@hostId = 
+@hostId = 12
+
 GET {{api}}/listings/host/{{hostId}}
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzliMjViNTNmMzZhNDdhZTdlMDg2MmEiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwibmJmIjoxNzM4MjI4MzIxLCJleHAiOjE3MzgyMzE5MjEsImlhdCI6MTczODIyODMyMSwiaXNzIjoiSG91c2VSZW50YWxTeXN0ZW0iLCJhdWQiOiJIb3VzZVJlbnRhbEF1ZGllbmNlIn0.13nZ8aEz392ibOFDddH9meuPVtUhI1pLYWs6nBBCj0o

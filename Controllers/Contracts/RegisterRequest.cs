@@ -15,4 +15,10 @@ public class RegisterRequest
     [Required]
     [MinLength(8)]
     public string Password { get; set; } = null!;
+
+    [Required]
+    public string Phone { get; set; } = null!;
+
+    [Required]
+    public string Address { get; set; } = null!;
 }

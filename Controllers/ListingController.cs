@@ -100,6 +100,14 @@ public class ListingController : ControllerBase
         return Ok(listings);
     }
 
+    /// <summary>
+    /// Update a listing by ID.
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="patchListingRequest"></param>
+    /// <response code="200">The listing was successfully updated.</response>
+    /// <response code="401">Unauthorized. User is not authenticated.</response>
+    /// <response code="500">Internal server error. Something went wrong on the server.</response>
     [HttpPatch("{id}")]
     public async Task<IActionResult> PatchListing(
         [FromRoute] [Required] [ObjectIdValidation] string id,
@@ -109,5 +117,33 @@ public class ListingController : ControllerBase
         var listing = await _listingService.PatchListingAsync(id, patchListingRequest);
 
         return Ok(listing);
+    }
+
+    /// <summary>
+    /// Get all listings.
+    /// </summary>
+    /// <param name="paginationParameters"></param>
+    /// <response code="200">Returns all listings.</response>
+    /// <response code="401">Unauthorized. User is not authenticated.</response>
+    /// <response code="500">Internal server error. Something went wrong on the server.</response>
+    [HttpGet]
+    public async Task<IActionResult> GetAllListings(
+        [FromQuery] PaginationParameters paginationParameters
+    )
+    {
+        var listing = await _listingService.GetListingsAsync(paginationParameters);
+
+        return Ok(new { TotalCount = listing.Count, Listings = listing });
+    }
+
+    [HttpGet("host/{id}")]
+    public async Task<IActionResult> GetListingByHostId(
+        [FromRoute] [Required] [ObjectIdValidation] string id,
+        [FromQuery] PaginationParameters paginationParameters
+    )
+    {
+        var listing = await _listingService.GetListingsAsync(paginationParameters);
+
+        return Ok(new { TotalCount = listing.Count, Listings = listing });
     }
 }
