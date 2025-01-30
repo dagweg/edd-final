@@ -18,6 +18,13 @@ public class ListingController : ControllerBase
         _listingService = listingService;
     }
 
+    /// <summary>
+    /// Create a new house rental listing.
+    /// </summary>
+    /// <param name="createListingRequest"></param>
+    /// <response code="201">The listing was successfully created.</response>
+    /// <response code="401">Unauthorized. User is not authenticated.</response>
+    /// <response code="500">Internal server error. Something went wrong on the server.</response>
     [HttpPost]
     public async Task<IActionResult> CreateListing(
         [FromBody] CreateListingRequest createListingRequest
@@ -36,15 +43,8 @@ public class ListingController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetListingById(string id)
     {
-        try
-        {
-            var listing = await _listingService.GetListingByIdAsync(id);
-            return Ok(listing);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
+        var listing = await _listingService.GetListingByIdAsync(id);
+        return Ok(listing);
     }
 
     [HttpDelete("{id}")]
@@ -71,5 +71,16 @@ public class ListingController : ControllerBase
         {
             return NotFound($"Listing with ID {id} not found");
         }
+
+        /// <summary>
+    /// Gets a list of listings by a name.
+    /// </summary>
+    /// <param name="name">The name of the listing to get.</param>
+    /// <returns>A list of listings with the name that was searched.</returns>
+    [HttpGet("search/{name}")]
+    public async Task<IActionResult> GetListingByName(string name)
+    {
+        var listings = await _listingService.GetListingByNameAsync(name);
+        return Ok(listings);
     }
 }

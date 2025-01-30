@@ -3,6 +3,7 @@
 
 POST {{api}}/listings/
 Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzlhNGE2MzQ3NzIzZDEzYTg4NTg3YjMiLCJlbWFpbCI6ImpvaG5kb2VAZ21haWwuY29tIiwibmJmIjoxNzM4MTcyMDMzLCJleHAiOjE3MzgxNzU2MzMsImlhdCI6MTczODE3MjAzMywiaXNzIjoiSG91c2VSZW50YWxTeXN0ZW0iLCJhdWQiOiJIb3VzZVJlbnRhbEF1ZGllbmNlIn0.c9J7eaS2OQl1foYNA4rw99JNGv5wClh5ZiwOxTFXHno
 
 {
   "Title": "Beautiful House in the Suburbs",
