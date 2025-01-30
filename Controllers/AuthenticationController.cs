@@ -22,6 +22,13 @@ public class AuthenticationController : ControllerBase
         _jwtOptions = jwtOptions.Value;
     }
 
+    /// <summary>
+    /// Gives a JWT token to the user if the credentials are correct. User then can use this token to authenticate themselves by sending it in the Authorization header.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <response code="200">Returns the JWT token and the expiration time.</response>
+    /// <response code="400">Bad request. The request is invalid.</response>
+    /// <response code="500">Internal server error. Something went wrong on the server.</response>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
     {
@@ -31,6 +38,13 @@ public class AuthenticationController : ControllerBase
         );
     }
 
+    /// <summary>
+    /// Registers a new user into the system. The user can then login with the credentials provided.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <response code="201">The user was successfully registered.</response>
+    /// <response code="400">Bad request. The request is invalid.</response>
+    /// <response code="500">Internal server error. Something went wrong on the server.</response>
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
