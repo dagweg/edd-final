@@ -48,9 +48,17 @@ public class ListingService : IListingService
         throw new NotImplementedException();
     }
 
-    public Task<List<Listing>> GetListingByNameAsync(string name)
+    public async Task<List<Listing>> GetListingByNameAsync(string name)
     {
-        throw new NotImplementedException();
+        // Retrieve all listings
+        var allListings = await _listingContext.GetAllAsync();
+
+        // Filter in memory
+        var filteredListings = allListings
+            .Where(l => l.Title.ToLower().Contains(name.ToLower()))
+            .ToList();
+
+        return filteredListings;
     }
 
     public Task<List<Listing>> GetListingsAsync()
