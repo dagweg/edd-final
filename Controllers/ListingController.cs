@@ -38,4 +38,16 @@ public class ListingController : ControllerBase
 
         return Created();
     }
+
+        /// <summary>
+    /// Gets a list of listings by a name.
+    /// </summary>
+    /// <param name="name">The name of the listing to get.</param>
+    /// <returns>A list of listings with the name that was searched.</returns>
+    [HttpGet("search/{name}")]
+    public async Task<IActionResult> GetListingByName(string name)
+    {
+        var listings = await _listingService.GetListingByNameAsync(name);
+        return Ok(listings);
+    }
 }

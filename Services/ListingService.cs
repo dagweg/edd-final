@@ -48,12 +48,26 @@ namespace HouseRentalSystem.Services
             return await _listingContext.DeleteAsync(id);
         }
 
+        public async Task<List<Listing>> GetListingByNameAsync(string name)
+        {
+            // Retrieve all listings
+            var allListings = await _listingContext.GetAllAsync();
+
+            // Filter in memory
+            var filteredListings = allListings
+                .Where(l => l.Title.ToLower().Contains(name.ToLower()))
+                .ToList();
+
+            return filteredListings;
+        }
+        
         // Get a listing by its ID
         public async Task<Listing> GetListingByIdAsync(string id)
         {
             var listing = await _listingContext.GetAsync(id);
             if (listing == null)
                 throw new KeyNotFoundException("Listing not found!");
+
 
             return listing;
         }
