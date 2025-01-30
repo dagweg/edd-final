@@ -38,15 +38,37 @@ namespace HouseRentalSystem.Services
                 Amenities = newListing.Amenities ?? new List<string>(), // Ensure Amenities isn't null
                 HostId = userId,
             };
-
             await _listingContext.CreateAsync(listing);
         }
+
+
+    public async Task<bool> DeleteListingAsync(string id)
+    {
+        var listing = await _listingContext.GetAsync(id);
+        if (listing is null)
+            return false;
+
+        await _listingContext.DeleteAsync(id);
+        return true;
+    }
+
+    public async Task<Listing> GetListingByIdAsync(string id)
+    {
+        var listing = await _listingContext.GetAsync(id);
+        if (listing is null)
+            throw new KeyNotFoundException($"Listing with ID {id} not found");
+
+        return listing;
+    }
+
+            
 
         // Delete a listing by ID
         public async Task<bool> DeleteListingAsync(string id)
         {
             return await _listingContext.DeleteAsync(id);
         }
+
 
         public async Task<List<Listing>> GetListingByNameAsync(string name)
         {

@@ -7,6 +7,7 @@ using HouseRentalSystem.Options;
 using HouseRentalSystem.Services.MongoDB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using HouseRentalSystem.Helpers;
 
 namespace HouseRentalSystem.Services;
 
