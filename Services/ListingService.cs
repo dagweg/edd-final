@@ -38,14 +38,23 @@ public class ListingService : IListingService
         );
     }
 
-    public Task<bool> DeleteListingAsync(string id)
+    public async Task<bool> DeleteListingAsync(string id)
     {
-        throw new NotImplementedException();
+        var listing = await _listingContext.GetAsync(id);
+        if (listing is null)
+            return false;
+
+        await _listingContext.DeleteAsync(id);
+        return true;
     }
 
-    public Task<Listing> GetListingByIdAsync(string id)
+    public async Task<Listing> GetListingByIdAsync(string id)
     {
-        throw new NotImplementedException();
+        var listing = await _listingContext.GetAsync(id);
+        if (listing is null)
+            throw new KeyNotFoundException($"Listing with ID {id} not found");
+
+        return listing;
     }
 
     public Task<List<Listing>> GetListingByNameAsync(string name)
