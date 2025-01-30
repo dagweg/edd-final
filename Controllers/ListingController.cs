@@ -17,6 +17,13 @@ public class ListingController : ControllerBase
         _listingService = listingService;
     }
 
+    /// <summary>
+    /// Create a new house rental listing.
+    /// </summary>
+    /// <param name="createListingRequest"></param>
+    /// <response code="201">The listing was successfully created.</response>
+    /// <response code="401">Unauthorized. User is not authenticated.</response>
+    /// <response code="500">Internal server error. Something went wrong on the server.</response>
     [HttpPost]
     public async Task<IActionResult> CreateListing(
         [FromBody] CreateListingRequest createListingRequest
