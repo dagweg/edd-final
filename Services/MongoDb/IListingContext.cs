@@ -1,9 +1,13 @@
+using System.Collections.Generic;
 using HouseRentalSystem.Models;
-using HouseRentalSystem.Services.MongoDB;
 
-namespace HouseRentalSystem.Services.MongoDB;
-
-public interface IListingContext : IMongoContext<Listing>
+namespace HouseRentalSystem.Services.MongoDB
 {
-    // listing specific methods
+    public interface IListingContext : IMongoContext<Listing>
+    {
+        // Custom methods specific to Listing entity
+
+        // Method to get listings by title
+        Task<List<Listing>> GetByNameAsync(string name);
+    }
 }
